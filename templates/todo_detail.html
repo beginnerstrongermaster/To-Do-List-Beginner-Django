@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+    <h1>
+        Details Here
+    </h1>
+    <h3>This is {{ todo.user.username }}'s todo</h3>
+
+    <div>{{ todo.title }}</div>
+    <div>{{ todo.details }}</div>
+    <div>{{ todo.createTime }}</div>
+    <div>{{ todo.completed }}</div>
+{% endblock body %}

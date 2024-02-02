@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body %}
+
+    <div class="header-bar">
+        <a href="{% url "todo-list" %}">&#8592; Back</a>
+    </div>
+    
+    <div class="card-body">
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="button" type="submit">
+    </form>
+    </div>
+    
+{% endblock body %}
