@@ -20,6 +20,7 @@ class TodoListView(LoginRequiredMixin, ListView):
     template_name = "todo_list.html"
     context_object_name = "todolist"
 
+    # If the current user is admin, display all todos
     def get_queryset(self):
         if self.request.user.is_superuser:
             return super().get_queryset()
@@ -28,7 +29,7 @@ class TodoListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         search = self.request.GET.get("search") or ''
-        #Based on what we filtered, filter it again with title__icontains=search
+        # filter again based on what we just filtered, with title__icontains=search
         context['todolist'] = context['todolist'].filter(title__icontains=search)
         return context
 
@@ -47,11 +48,7 @@ class TodoCreateView(LoginRequiredMixin, CreateView):
     context_object_name = "form"
     success_url = reverse_lazy('todo-list')
 
-    # Return the detail of todo we just created
-    # def get_success_url(self):
-    #     return reverse_lazy("todo-detail", kwargs={"pk": self.object.pk})
-
-    # Set logged-in user as default for field user
+    # Set logged-in user as selected user
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
@@ -65,12 +62,7 @@ class TodoUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = "form"
     success_url = reverse_lazy('todo-list')
 
-    # Return the detail of todo we just created
-    # def get_success_url(self):
-    #     pk = self.kwargs.get("pk")
-    #     return reverse_lazy("todo-detail", kwargs={"pk": pk})
-
-    # Set logged-in user as default of field user
+    # Set logged-in user as selected user
     def form_valid(self, form):
         # set default user to self.request.user
         form.instance.user = self.request.user

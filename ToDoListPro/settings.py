@@ -75,11 +75,11 @@ WSGI_APPLICATION = 'ToDoListPro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todolist',
-        'USER': 'root',
-        'PASSWORD': 'admin123',
+        'NAME': 'YourDBName',
+        'USER': 'YourUserName',
+        'PASSWORD': 'YourPassword',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': 'YourPort',
     }
 }
 
